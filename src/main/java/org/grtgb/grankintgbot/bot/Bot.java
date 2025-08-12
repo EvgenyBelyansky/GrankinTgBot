@@ -70,7 +70,7 @@ public class Bot extends TelegramLongPollingBot {
 
     @Autowired
     public Bot(LessonService lessonService, BotCommandService botCommandService) {
-        super("8442309871:AAGbJLKum_xpRaMYUPNwv4zq8O7XBsdRTi0");
+        super("");
         this.lessonService = lessonService;
         this.botCommandService = botCommandService;
     }
