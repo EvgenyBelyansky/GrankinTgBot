@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,7 +15,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "user")
+@Table(name = "users")
 public class UserEntity {
 
     @Id
@@ -24,15 +26,21 @@ public class UserEntity {
 
     private String lastName;
 
+    @Column(unique = true, nullable = false)
     private Long chatId;
 
     @OneToMany(mappedBy = "user")
     private List<LessonEntity> lessons;
 
+    @Column(name = "login_date")
+    private Instant loginDate;
+
     @Builder
-    public UserEntity(String firstName, String lastName) {
+    public UserEntity(String firstName, String lastName, Long chatId) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.chatId = chatId;
+        this.loginDate = Instant.now();
     }
 
 }

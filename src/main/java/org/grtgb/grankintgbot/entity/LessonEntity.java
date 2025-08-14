@@ -27,8 +27,7 @@ public class LessonEntity {
     @Column(name = "lesson_end_date")
     private Instant lessonEndDate;
 
-    @ManyToOne(fetch = FetchType.LAZY,
-            cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
