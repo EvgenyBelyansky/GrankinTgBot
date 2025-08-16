@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.grtgb.grankintgbot.enums.UserState;
 
 import java.time.Instant;
 import java.util.List;
@@ -35,12 +35,16 @@ public class UserEntity {
     @Column(name = "login_date")
     private Instant loginDate;
 
+    @Enumerated(value = EnumType.STRING)
+    private UserState userState;
+
     @Builder
     public UserEntity(String firstName, String lastName, Long chatId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.chatId = chatId;
         this.loginDate = Instant.now();
+        this.userState = UserState.DEFAULT;
     }
 
 }

@@ -1,4 +1,4 @@
-package org.grtgb.grankintgbot.botCommand;
+package org.grtgb.grankintgbot.botCommand.defaultCommand;
 
 import org.grtgb.grankintgbot.dto.UserDto;
 import org.grtgb.grankintgbot.service.UserService;
@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
-@Component
-public class RegistrationCommand implements Command{
+@Component("/registration")
+public class RegistrationDefaultCommand implements DefaultCommand {
 
     private UserService userService;
     private UserDto userDto;
@@ -22,7 +22,7 @@ public class RegistrationCommand implements Command{
 
         return new SendMessage(
                 update.getMessage().getChatId().toString(),
-                "Привет %s. Ты зарегистрирован, можешь записываться на занятия"
+                "Введите имя: "
                         .formatted(update
                                 .getMessage()
                                 .getFrom()

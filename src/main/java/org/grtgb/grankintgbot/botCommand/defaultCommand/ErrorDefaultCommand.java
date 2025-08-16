@@ -1,9 +1,9 @@
-package org.grtgb.grankintgbot.botCommand;
+package org.grtgb.grankintgbot.botCommand.defaultCommand;
 
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
-public class ErrorCommand implements Command{
+public class ErrorDefaultCommand implements DefaultCommand {
     @Override
     public SendMessage process(Update update) {
         return new SendMessage(

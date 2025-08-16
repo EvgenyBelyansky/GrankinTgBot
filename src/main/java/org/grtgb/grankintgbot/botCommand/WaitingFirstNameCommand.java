@@ -4,9 +4,14 @@ import org.grtgb.grankintgbot.enums.UserState;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
-public interface Command {
+public class WaitingFirstNameCommand implements Command{
+    @Override
+    public SendMessage process(Update update) {
+        return null;
+    }
 
-    SendMessage process(Update update);
-
-    UserState getState();
+    @Override
+    public UserState getState() {
+        return null;
+    }
 }
