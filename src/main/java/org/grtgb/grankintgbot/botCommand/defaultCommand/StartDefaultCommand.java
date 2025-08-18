@@ -16,52 +16,26 @@ public class StartDefaultCommand implements DefaultCommand {
 
     private final UserRepository userRepository;
 
-//    @Override
-//    public SendMessage process(Update update) {
-//
-//        final Long chatId = update.getMessage().getChatId();
-//
-//        registerOrUpdateLoginDate(chatId);
-//
-//
-//        return new SendMessage(
-//                chatId.toString(),
-//                "Привет %s. Хочешь записаться на урок?".formatted(update.getMessage().getFrom().getFirstName())
-//        );
-//
-//
-//    }
-
     @Override
     public SendMessage process(Update update) {
 
         final Long chatId = update.getMessage().getChatId();
 
+        String messageText = "Привет %s. Если хочешь записаться на урок, зарегистрируйся"
+                .formatted(update.getMessage().getFrom().getFirstName());
 
+        InlineKeyboardButton button = new InlineKeyboardButton("✅ Зарегистрироваться");
+        button.setCallbackData("/registration");
 
-            String messageText = "Привет %s. Если хочешь записаться на урок, зарегистрируйся"
-                    .formatted(update.getMessage().getFrom().getFirstName());
+        InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup();
+        keyboard.setKeyboard(List.of(List.of(button)));
 
-            InlineKeyboardButton button = new InlineKeyboardButton("✅ Зарегистрироваться");
-            button.setCallbackData("/registration");
-
-            InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup();
-            keyboard.setKeyboard(List.of(
-                    List.of(button)
-            ));
-
-            return SendMessage.builder()
-                    .chatId(chatId.toString())
-                    .text(messageText)
-                    .replyMarkup(keyboard)
-                    .build();
-
+        return SendMessage.builder()
+                .chatId(chatId.toString())
+                .text(messageText)
+                .replyMarkup(keyboard)
+                .build();
     }
 
-
-
-
-
-
-
 }
+

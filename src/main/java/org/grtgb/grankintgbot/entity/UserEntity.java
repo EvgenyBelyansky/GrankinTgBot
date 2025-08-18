@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.grtgb.grankintgbot.enums.RegistrationState;
 import org.grtgb.grankintgbot.enums.UserState;
 
 import java.time.Instant;
@@ -38,6 +39,9 @@ public class UserEntity {
     @Enumerated(value = EnumType.STRING)
     private UserState userState;
 
+    @Enumerated(value = EnumType.STRING)
+    private RegistrationState userRegistrationState;
+
     @Builder
     public UserEntity(String firstName, String lastName, Long chatId) {
         this.firstName = firstName;
@@ -45,6 +49,7 @@ public class UserEntity {
         this.chatId = chatId;
         this.loginDate = Instant.now();
         this.userState = UserState.DEFAULT;
+        this.userRegistrationState = RegistrationState.UNREGISTERED;
     }
 
 }

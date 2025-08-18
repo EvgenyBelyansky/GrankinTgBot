@@ -1,7 +1,9 @@
 package org.grtgb.grankintgbot.botCommand;
 
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.grtgb.grankintgbot.entity.UserEntity;
+import org.grtgb.grankintgbot.enums.RegistrationState;
 import org.grtgb.grankintgbot.enums.UserState;
 import org.grtgb.grankintgbot.repository.UserRepository;
 import org.springframework.stereotype.Component;
@@ -11,7 +13,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 @Component
 @RequiredArgsConstructor
-public class WaitingFirstNameCommand implements Command {
+public class WaitingLastNameCommand implements Command{
 
     private final UserRepository userRepository;
 
@@ -22,9 +24,10 @@ public class WaitingFirstNameCommand implements Command {
         final Long chatId = update.getMessage().getChatId();
         final UserEntity user = userRepository.findByChatId(chatId);
 
-        user.setFirstName(update.getMessage().getText());
+        user.setLastName(update.getMessage().getText());
 
-        user.setUserState(UserState.WAITING_LAST_NAME);
+        user.setUserState(UserState.DEFAULT);
+        user.setUserRegistrationState(RegistrationState.REGISTERED);
 
         userRepository.save(user);
         return null;
@@ -32,6 +35,6 @@ public class WaitingFirstNameCommand implements Command {
 
     @Override
     public UserState getState() {
-        return UserState.WAITING_FIRST_NAME;
+        return UserState.WAITING_LAST_NAME;
     }
 }

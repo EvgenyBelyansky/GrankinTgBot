@@ -4,8 +4,8 @@ public enum UserState {
 
     DEFAULT,
 
-    WAITING_FIRSTNAME,
+    WAITING_FIRST_NAME,
 
-    WAITING_LASTNAME
+    WAITING_LAST_NAME
 
 }

@@ -15,19 +15,20 @@ public class RegistrationDefaultCommand implements DefaultCommand {
 
     @Override
     public SendMessage process(Update update) {
-
-//        userService.registration(userDto);
-
-        System.out.println(update.getMessage().getText());
-
-        return new SendMessage(
-                update.getMessage().getChatId().toString(),
-                "Введите имя: "
-                        .formatted(update
-                                .getMessage()
-                                .getFrom()
-                                .getFirstName()
-                        )
-        );
+        // Если пришёл CallbackQuery (нажатие inline-кнопки)
+        if (update.hasCallbackQuery()) {
+            return new SendMessage(
+                    update.getCallbackQuery().getMessage().getChatId().toString(),
+                    "Введите ваше имя:"
+            );
+        }
+        // Если команда вызвана текстом (например, /registration)
+        else if (update.hasMessage()) {
+            return new SendMessage(
+                    update.getMessage().getChatId().toString(),
+                    "Введите ваше имя:"
+            );
+        }
+        return null;
     }
 }
